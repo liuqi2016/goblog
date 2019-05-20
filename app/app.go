@@ -12,11 +12,11 @@ type application struct {
 }
 
 func New() *application {
-	return &application{
+	app := application{
 		routes: make(map[string]interface{}),
 	}
+	return &app
 }
-
 func (p *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	controllerName := r.URL.Query().Get("c")
 	actionName := r.URL.Query().Get("a")
@@ -36,22 +36,25 @@ func (p *application) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var methods []string //创建一个切片接受所有方法
 
 	for i := 0; i < v.NumMethod(); i++ {
-		fmt.Println(t.Method(i).Name)
+		// fmt.Println(t.Method(i).Name)
 		methods = append(methods, t.Method(i).Name)
 	}
 	var hasMethod bool = false
 	for _, method := range methods {
+
 		if method == actionName {
 			hasMethod = true
+			break
 		}
 	}
-	if hasMethod == false {
+	// fmt.Println(hasMethod)
+	if hasMethod == true {
 		ele := reflect.ValueOf(route).Elem()
 		ele.FieldByName("Request").Set(reflect.ValueOf(r))
 		ele.FieldByName("Response").Set(reflect.ValueOf(w))
 		ele.MethodByName(actionName).Call([]reflect.Value{})
 	} else {
-		fmt.Println(404)
+		fmt.Fprintln(w, "404 no page find")
 	}
 }
 

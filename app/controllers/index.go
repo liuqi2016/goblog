@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"goblog/app"
+	"text/template"
 )
 
 type IndexController struct {
@@ -10,8 +11,8 @@ type IndexController struct {
 }
 
 func (p IndexController) Index() {
-	fmt.Println("66666666666666666")
-	fmt.Fprint(p.Response, p.Request.RequestURI)
+	t, _ := template.ParseFiles("views/index/index.html")
+	t.Execute(p.Response, map[string]string{"title": "测试", "time": "1111111"})
 }
 
 func (p IndexController) Info() {
