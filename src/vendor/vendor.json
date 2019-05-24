@@ -9,7 +9,13 @@
 			"revisionTime": "2018-08-14T08:58:52Z",
 			"version": "v1.3",
 			"versionExact": "v1.3.0"
+		},
+		{
+			"checksumSHA1": "NLxrIei+y/HFTknuxPZB0G5UJxk=",
+			"path": "github.com/go-ini/ini",
+			"revision": "3be5ad479f69d4e08d7fe25edf79bf3346bd658e",
+			"revisionTime": "2019-03-27T02:48:45Z"
 		}
 	],
-	"rootPath": "goblog"
+	"rootPath": "blog/goblog/src"
 }
