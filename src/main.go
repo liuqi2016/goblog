@@ -1,13 +1,21 @@
 package main
 
 import (
-	"blog/goblog/routers"
-
-	"github.com/gin-gonic/gin"
+	"blog/src/pkg/setting"
+	"blog/src/routers"
+	"fmt"
+	"net/http"
 )
 
 func main() {
-	r := gin.New()
-	routers.InitRoute(r)
-	r.Run(":80") // listen and serve on 0.0.0.0:80
+	router := routers.InitRouter()
+	s := &http.Server{
+		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
+		Handler:        router,
+		ReadTimeout:    setting.ReadTimeout,
+		WriteTimeout:   setting.WriteTimeout,
+		MaxHeaderBytes: 1 << 20,
+	}
+
+	s.ListenAndServe()
 }

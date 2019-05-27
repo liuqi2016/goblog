@@ -1,34 +1,37 @@
 package routers
 
 import (
+	"blog/src/middleware/jwt"
+	"blog/src/pkg/setting"
+	"blog/src/routers/api"
+	v1 "blog/src/routers/api/v1"
+
 	"github.com/gin-gonic/gin"
 )
 
-// InitRoute 初始化路由
-func InitRoute(r *gin.Engine) {
-	// // 全局中间件
-	// // 使用 Logger 中间件
-	// r.Use(gin.Logger())
+func InitRouter() *gin.Engine {
+	r := gin.New()
 
-	// // 使用 Recovery 中间件
-	// r.Use(gin.Recovery())
+	r.Use(gin.Logger())
 
-	// // 路由添加中间件，可以添加任意多个
-	// r.GET("/benchmark", MyBenchLogger(), benchEndpoint)
-	// // 路由组中添加中间件
-	// // authorized := r.Group("/", AuthRequired())
-	// // exactly the same as:
-	// authorized := r.Group("/")
-	// // per group middleware! in this case we use the custom created
-	// // AuthRequired() middleware just in the "authorized" group.
-	// authorized.Use(AuthRequired())
-	// {
-	// 	authorized.POST("/login", loginEndpoint)
-	// 	authorized.POST("/submit", submitEndpoint)
-	// 	authorized.POST("/read", readEndpoint)
+	r.Use(gin.Recovery())
 
-	// 	// nested group
-	// 	testing := authorized.Group("testing")
-	// 	testing.GET("/analytics", analyticsEndpoint)
-	// }
+	gin.SetMode(setting.RunMode)
+
+	r.GET("/auth", api.GetAuth)
+	apiv1 := r.Group("/api/v1")
+	apiv1.Use(jwt.JWT())
+	{
+		//获取标签列表
+		apiv1.GET("/tags", v1.GetTags)
+		//新建标签
+		apiv1.POST("/tags", v1.AddTag)
+		//更新指定标签
+		apiv1.PUT("/tags/:id", v1.EditTag)
+		//删除指定标签
+		apiv1.DELETE("/tags/:id", v1.DeleteTag)
+		apiv1.Use(jwt.JWT())
+
+	}
+	return r
 }
