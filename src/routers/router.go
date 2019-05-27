@@ -25,9 +25,8 @@ func InitRouter() *gin.Engine {
 	//用户
 	{
 		// 注册用户
-		apiv1.POST("/user", v1.RegisterUser)
+		apiv1.POST("/users", v1.RegisterUser)
 	}
-
 	{
 		//获取标签列表
 		apiv1.GET("/tags", v1.GetTags)
@@ -38,7 +37,6 @@ func InitRouter() *gin.Engine {
 		//删除指定标签
 		apiv1.DELETE("/tags/:id", v1.DeleteTag)
 		apiv1.Use(jwt.JWT())
-
 	}
 	return r
 }

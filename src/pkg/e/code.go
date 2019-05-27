@@ -1,9 +1,10 @@
 package e
 
 const (
-	SUCCESS        = 200
-	ERROR          = 500
-	INVALID_PARAMS = 400
+	SUCCESS               = 200
+	ERROR                 = 500
+	INVALID_PARAMS        = 400
+	ERROR_STRTOINT64_FAIL = 00001
 
 	ERROR_EXIST_TAG         = 10001
 	ERROR_NOT_EXIST_TAG     = 10002
@@ -13,4 +14,7 @@ const (
 	ERROR_AUTH_CHECK_TOKEN_TIMEOUT = 20002
 	ERROR_AUTH_TOKEN               = 20003
 	ERROR_AUTH                     = 20004
+
+	//User
+	ERROR_EXIST_USER = 30001
 )

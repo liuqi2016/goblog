@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	// 路由
 	router := routers.InitRouter()
 	s := &http.Server{
 		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
@@ -16,6 +17,8 @@ func main() {
 		WriteTimeout:   setting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
+
+	// 数据库迁移
 
 	s.ListenAndServe()
 }
