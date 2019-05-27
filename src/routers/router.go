@@ -1,14 +1,15 @@
 package routers
 
 import (
+	"blog/src/app/api"
+	v1 "blog/src/app/api/v1"
 	"blog/src/middleware/jwt"
 	"blog/src/pkg/setting"
-	"blog/src/routers/api"
-	v1 "blog/src/routers/api/v1"
 
 	"github.com/gin-gonic/gin"
 )
 
+// InitRouter 初始化路由
 func InitRouter() *gin.Engine {
 	r := gin.New()
 
@@ -18,9 +19,15 @@ func InitRouter() *gin.Engine {
 
 	gin.SetMode(setting.RunMode)
 
-	r.GET("/auth", api.GetAuth)
+	r.GET("/auth", api.GetAuth) // 获取token
 	apiv1 := r.Group("/api/v1")
 	apiv1.Use(jwt.JWT())
+	//用户
+	{
+		// 注册用户
+		apiv1.POST("/user", v1.RegisterUser)
+	}
+
 	{
 		//获取标签列表
 		apiv1.GET("/tags", v1.GetTags)
