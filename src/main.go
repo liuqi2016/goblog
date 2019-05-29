@@ -17,8 +17,5 @@ func main() {
 		WriteTimeout:   setting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
-
-	// 数据库迁移
-
 	s.ListenAndServe()
 }

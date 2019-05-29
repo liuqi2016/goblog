@@ -4,6 +4,7 @@ import (
 	"blog/src/pkg/setting"
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -11,10 +12,12 @@ import (
 
 var db *gorm.DB
 
+// Model 基本模型的定义
 type Model struct {
-	ID         int `gorm:"primary_key" json:"id"`
-	CreatedOn  int `json:"created_on"`
-	ModifiedOn int `json:"modified_on"`
+	ID        uint       `gorm:"primary_key" json:"id"`
+	CreatedAt time.Time  `json:"create_at"`
+	UpdatedAt time.Time  `json:"update_at"`
+	DeletedAt *time.Time `json:"delete_at"`
 }
 
 func init() {
@@ -49,9 +52,17 @@ func init() {
 		return tablePrefix + defaultTableName
 	}
 	db.LogMode(true)
+
 	db.SingularTable(true)
 	db.DB().SetMaxIdleConns(10)
 	db.DB().SetMaxOpenConns(100)
+	// 数据库迁移
+	// db.AutoMigrate(&Auth{})
+	db.AutoMigrate(&User{})
+	var now_version = 1
+	if now_version == 1 {
+		db.Model(&User{}).DropColumn("created_on").DropColumn("modified_on")
+	}
 }
 
 func CloseDB() {

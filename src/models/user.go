@@ -12,14 +12,34 @@ type User struct {
 
 // RegisterUser 注册
 func RegisterUser(u *User) (err error) {
-	db.Create(u)
+	err = db.Create(u).Error
 	return
 }
 
+// EditUser 编辑
+func EditUser(u *User) (err error) {
+	err = db.Save(u).Error
+	return
+}
+
+// CheckAuth 授权
+func CheckAuth(username, password string) bool {
+	var auth User
+	db.Select("id").Where(User{UserName: username, Password: password}).First(&auth)
+	if auth.ID > 0 {
+		return true
+	}
+	return false
+}
+
 // ExistUserByName 检验名字是否存在
-func ExistUserByName(username string) (r bool) {
+func ExistUserByName(username string, id uint) (r bool) {
 	user := User{}
-	db.Select("id").Where("user_name = ?", username).First(&user)
+	if id != 0 {
+		db.Select("id").Where("user_name = ? and id <> ?", username, id).First(&user)
+	} else {
+		db.Select("id").Where("user_name = ?", username).First(&user)
+	}
 	if user.ID > 0 {
 		r = true
 	} else {

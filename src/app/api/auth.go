@@ -5,7 +5,6 @@ import (
 	"blog/src/pkg/e"
 	"blog/src/pkg/logging"
 	"blog/src/pkg/util"
-	"fmt"
 	"net/http"
 
 	"github.com/astaxie/beego/validation"
@@ -28,7 +27,7 @@ func GetAuth(c *gin.Context) {
 	code := e.INVALID_PARAMS
 	if ok {
 		isExist := models.CheckAuth(username, password)
-		fmt.Println(isExist)
+		// fmt.Println(isExist)
 		if isExist {
 			token, err := util.GenerateToken(username, password)
 			if err != nil {
