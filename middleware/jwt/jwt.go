@@ -1,8 +1,8 @@
 package jwt
 
 import (
-	"blog/src/pkg/e"
-	"blog/src/pkg/util"
+	"blog/pkg/e"
+	"blog/pkg/util"
 	"fmt"
 	"net/http"
 	"time"

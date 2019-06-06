@@ -1,8 +1,8 @@
 package v1
 
 import (
-	"blog/src/models"
-	"blog/src/pkg/e"
+	"blog/models"
+	"blog/pkg/e"
 	"fmt"
 	"log"
 	"net/http"

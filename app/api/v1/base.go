@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"blog/src/pkg/e"
+	"blog/pkg/e"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
