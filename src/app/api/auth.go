@@ -53,3 +53,7 @@ func GetAuth(c *gin.Context) {
 		"data": data,
 	})
 }
+
+func DeleteAuth(c *gin.Context) {
+
+}

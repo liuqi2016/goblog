@@ -1,0 +1,5 @@
+FROM golang
+MAINTAINER  liuqi
+WORKDIR /go/src/
+COPY . .
+EXPOSE 80

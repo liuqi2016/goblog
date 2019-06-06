@@ -23,6 +23,7 @@ func GetUser(c *gin.Context) {
 
 // LogoutUser  注销
 func LogoutUser(c *gin.Context) {
+	//销毁签名
 
 }
 
