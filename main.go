@@ -1,8 +1,8 @@
 package main
 
 import (
-	"blog/src/pkg/setting"
-	"blog/src/routers"
+	"blog/pkg/setting"
+	"blog/routers"
 	"fmt"
 	"net/http"
 )

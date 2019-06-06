@@ -1,10 +1,10 @@
 package api
 
 import (
-	"blog/src/models"
-	"blog/src/pkg/e"
-	"blog/src/pkg/logging"
-	"blog/src/pkg/util"
+	"blog/models"
+	"blog/pkg/e"
+	"blog/pkg/logging"
+	"blog/pkg/util"
 	"net/http"
 
 	"github.com/astaxie/beego/validation"

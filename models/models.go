@@ -1,7 +1,7 @@
 package models
 
 import (
-	"blog/src/pkg/setting"
+	"blog/pkg/setting"
 	"fmt"
 	"log"
 	"time"
