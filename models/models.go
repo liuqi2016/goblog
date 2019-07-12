@@ -1,8 +1,8 @@
 package models
 
 import (
-	"blog/pkg/setting"
 	"fmt"
+	"goblog/pkg/setting"
 	"log"
 	"time"
 
@@ -58,11 +58,11 @@ func init() {
 	db.DB().SetMaxOpenConns(100)
 	// 数据库迁移
 	// db.AutoMigrate(&Auth{})
-	db.AutoMigrate(&User{})
-	var now_version = 1
-	if now_version == 1 {
-		db.Model(&User{}).DropColumn("created_on").DropColumn("modified_on")
-	}
+	// db.AutoMigrate(&User{})
+	// var now_version = 2
+	// if now_version == 1 {
+	// 	db.Model(&User{}).DropColumn("created_on").DropColumn("modified_on")
+	// }
 }
 
 func CloseDB() {
